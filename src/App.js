@@ -56,7 +56,8 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     //console.log(charge, amount);
-    if (charge !== "" && amount > 0) {
+    if (charge !== "") {
+      //&& amount > 0
       if (edit) {
         let tempExpenses = expenses.map((item) => {
           return item.id === id ? { ...item, charge, amount } : item;
@@ -130,7 +131,7 @@ function App() {
         />
       </main>
       <h1>
-        total spending :{" "}
+        total balance :{" "}
         <span className="total">
           ${" "}
           {expenses.reduce((acc, curr) => {
