@@ -1,28 +1,23 @@
-import React from "react";
-import Item from "./ExpenseItem";
-import { MdDelete } from "react-icons/md";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
+import ExpenseTransaction from "./ExpenseTransaction";
 
-const ExpenseList = ({ expenses, handleEdit, handleDelete, clearItems }) => {
+const ExpenseList = () => {
+  const { expenseTransactions } = useContext(GlobalContext);
+
+  console.log(expenseTransactions);
+
   return (
-    <div>
-      <ul className="list">
-        {expenses.map((expense) => {
-          return (
-            <Item
-              key={expense.id}
-              expense={expense}
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-            />
-          );
-        })}
+    <div className="transactions transactions-expense">
+      <h2>Transaction History</h2>
+      <ul className="transaction-list">
+        {expenseTransactions.map(expenseTransaction => (
+          <ExpenseTransaction
+            key={expenseTransaction.id}
+            expenseTransaction={expenseTransaction}
+          />
+        ))}
       </ul>
-      {expenses.length > 0 && (
-        <button className="btn" onClick={clearItems}>
-          clear expenses
-          <MdDelete className="btn-icon" />
-        </button>
-      )}
     </div>
   );
 };
